@@ -6,16 +6,16 @@ import org.quartz.JobExecutionContext;
 import khome.route.service.OptService;
 import khome.route.service.impl.OptServiceImpl;
 
-public class ReLoginJob implements Job {
+public class Check2ReLogJob implements Job {
 
 	/**
-	 * 执行重登录操作
+	 * 执行公网ip检查
 	 */
 	@Override
 	public void execute(JobExecutionContext arg0) {
 		OptService optService = OptServiceImpl.getInstance();
 		try {
-			optService.seleniumOpt();
+			optService.checkPublicIp();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

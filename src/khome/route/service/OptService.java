@@ -2,7 +2,7 @@ package khome.route.service;
 
 public interface OptService {
 
-	public void seleniumOpt();
+	public void seleniumOpt() throws Exception;
 
-	public void checkPublicIp();
+	public void checkPublicIp() throws Exception;
 }

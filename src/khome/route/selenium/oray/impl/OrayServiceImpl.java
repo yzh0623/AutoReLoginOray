@@ -11,7 +11,6 @@ import khome.route.selenium.oray.OrayService;
 public class OrayServiceImpl implements OrayService {
 
 	private WebDriver driver;
-	private String baseUrl;
 	private String domainUrl;
 
 	private static OrayServiceImpl INSTANCE;
@@ -26,44 +25,37 @@ public class OrayServiceImpl implements OrayService {
 
 	// 构造函数初始化变量
 	public OrayServiceImpl() {
-		driver = new FirefoxDriver();
-		baseUrl = "http://www.oray.com";
 		domainUrl = "https://console.oray.com/domain/root/";
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	// 使用selenium执行刷新花生壳dns操作
 	@Override
-	public void orayFlushDNS() {
-		try {
-			// 获取url
-			driver.get(baseUrl + "/");
-			// 点击登录
-			driver.findElement(By.linkText("登录")).click();
-			driver.findElement(By.id("account")).clear();
-			// 输入用户名
-			driver.findElement(By.id("account")).sendKeys("yuanzh0623");
-			driver.findElement(By.id("password")).clear();
-			// 输入密码
-			driver.findElement(By.id("password")).sendKeys("yzh0623");
-			// 跳转页面
-			driver.findElement(By.cssSelector("input.btn-red")).click();
-			Thread.sleep(3000);
-			// 重定向页面
-			driver.get(domainUrl);
-			Thread.sleep(1000);
-			// 选择壳域名
-			driver.findElement(By.linkText("壳域名")).click();
-			Thread.sleep(1000);
-			// 选择khome.iok.la地址手工刷新dns
-			driver.findElement(By.linkText("khome.iok.la")).click();
-			driver.quit();
+	public void orayFlushDNS() throws Exception {
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		driver = new FirefoxDriver();
+		// 最大化窗口，使selenium能够更好地操作
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		// 重定向页面
+		driver.get(domainUrl);
 
+		// 输入用户名
+		driver.findElement(By.id("account")).clear();
+		driver.findElement(By.id("account")).sendKeys("yuanzh0623");
+		// 输入密码
+		driver.findElement(By.id("password")).clear();
+		driver.findElement(By.id("password")).sendKeys("yzh0623");
+		// 跳转页面
+		driver.findElement(By.cssSelector("input.btn-red")).click();
+		Thread.sleep(3000);
+
+		// 选择壳域名
+		driver.findElement(By.linkText("壳域名")).click();
+		Thread.sleep(1000);
+		// 选择khome.iok.la地址手工刷新dns
+		driver.findElement(By.linkText("khome.iok.la")).click();
+		Thread.sleep(3000);
+
+		driver.quit();
 	}
-
 }
