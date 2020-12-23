@@ -11,7 +11,7 @@
 		<log4j.version>1.7.2</log4j.version>
 		<htmlunit.version>2.52.0</htmlunit.version>
 		<junit.version>4.11</junit.version>
-		<quartz.version>2.2.1</quartz.version>
+		<quartz.version>2.3.2</quartz.version>
 		<jdk.version>1.8</jdk.version>
 	</properties>
 
